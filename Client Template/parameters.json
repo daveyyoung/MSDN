@@ -1,0 +1,39 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "southeastasia"
+        },
+        "networkInterfaceName": {
+            "value": "dyws03993"
+        },
+        "networkSecurityGroupId": {
+            "value": "/subscriptions/0a8f1b54-a423-4676-a711-b83ef2a8d610/resourceGroups/CLIENT-ResourceGroup/providers/Microsoft.Network/networkSecurityGroups/CLIENT-NetworkSecurityGroup"
+        },
+        "subnetName": {
+            "value": "CLIENT-Subnet"
+        },
+        "virtualNetworkId": {
+            "value": "/subscriptions/0a8f1b54-a423-4676-a711-b83ef2a8d610/resourceGroups/NET-ResourceGroup/providers/Microsoft.Network/virtualNetworks/daveyyoung-Network"
+        },
+        "virtualMachineName": {
+            "value": "DYWS03"
+        },
+        "virtualMachineRG": {
+            "value": "CLIENT-ResourceGroup"
+        },
+        "osDiskType": {
+            "value": "StandardSSD_LRS"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_B2ms"
+        },
+        "adminUsername": {
+            "value": "daveyyoung"
+        },
+        "adminPassword": {
+            "value": null
+        }
+    }
+}
