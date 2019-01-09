@@ -5,45 +5,28 @@
         "location": {
             "type": "string"
         },
-        "networkInterfaceName": {
-            "type": "string"
-        },
-        "networkSecurityGroupId": {
-            "type": "string"
-        },
-        "subnetName": {
-            "type": "string"
-        },
-        "virtualNetworkId": {
-            "type": "string"
-        },
         "virtualMachineName": {
             "type": "string"
-        },
-        "virtualMachineRG": {
-            "type": "string"
-        },
-        "osDiskType": {
-            "type": "string"
-        },
-        "virtualMachineSize": {
-            "type": "string"
-        },
-        "adminUsername": {
-            "type": "string"
-        },
-        "adminPassword": {
-            "type": "secureString"
         }
     },
     "variables": {
-        "nsgId": "[parameters('networkSecurityGroupId')]",
-        "vnetId": "[parameters('virtualNetworkId')]",
-        "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]"
+        "suffix": "[uniqueString(ResourceGroup().id,ResourceGroup().location)]",
+        "networkInterfaceName": "[toLower(concat(parameters('virtualMachineName'),'-nic-', variables('suffix')))]",
+        "networkSecurityGroupId": "/subscriptions/0a8f1b54-a423-4676-a711-b83ef2a8d610/resourceGroups/CLIENT-ResourceGroup/providers/Microsoft.Network/networkSecurityGroups/CLIENT-NetworkSecurityGroup",
+        "subnetName": "CLIENT-Subnet",
+        "virtualNetworkId": "/subscriptions/0a8f1b54-a423-4676-a711-b83ef2a8d610/resourceGroups/NET-ResourceGroup/providers/Microsoft.Network/virtualNetworks/daveyyoung-Network",
+        "virtualMachineRG": "CLIENT-ResourceGroup",
+        "osDiskType": "StandardSSD_LRS",
+        "virtualMachineSize": "Standard_B2ms",
+        "adminUsername": "daveyyoung",
+        "adminPassword": "RangersDave17",
+        "nsgId": "[variables('networkSecurityGroupId')]",
+        "vnetId": "[variables('virtualNetworkId')]",
+        "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]"
     },
     "resources": [
         {
-            "name": "[parameters('networkInterfaceName')]",
+            "name": "[variables('networkInterfaceName')]",
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2018-04-01",
             "location": "[parameters('location')]",
@@ -72,11 +55,11 @@
             "apiVersion": "2018-06-01",
             "location": "[parameters('location')]",
             "dependsOn": [
-                "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName'))]"
+                "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'))]"
             ],
             "properties": {
                 "hardwareProfile": {
-                    "vmSize": "[parameters('virtualMachineSize')]"
+                    "vmSize": "[variables('virtualMachineSize')]"
                 },
                 "storageProfile": {
                     "osDisk": {
@@ -95,14 +78,14 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('networkInterfaceName'))]"
                         }
                     ]
                 },
                 "osProfile": {
                     "computerName": "[parameters('virtualMachineName')]",
-                    "adminUsername": "[parameters('adminUsername')]",
-                    "adminPassword": "[parameters('adminPassword')]",
+                    "adminUsername": "[variables('adminUsername')]",
+                    "adminPassword": "[variables('adminPassword')]",
                     "windowsConfiguration": {
                         "enableAutomaticUpdates": true,
                         "provisionVmAgent": true
@@ -116,7 +99,7 @@
     "outputs": {
         "adminUsername": {
             "type": "string",
-            "value": "[parameters('adminUsername')]"
+            "value": "[variables('adminUsername')]"
         }
     }
 }
