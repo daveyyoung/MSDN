@@ -15,7 +15,6 @@
         "networkSecurityGroupId": "/subscriptions/0a8f1b54-a423-4676-a711-b83ef2a8d610/resourceGroups/CLIENT-ResourceGroup/providers/Microsoft.Network/networkSecurityGroups/CLIENT-NetworkSecurityGroup",
         "subnetName": "CLIENT-Subnet",
         "virtualNetworkId": "/subscriptions/0a8f1b54-a423-4676-a711-b83ef2a8d610/resourceGroups/NET-ResourceGroup/providers/Microsoft.Network/virtualNetworks/daveyyoung-Network",
-        "virtualMachineRG": "CLIENT-ResourceGroup",
         "osDiskType": "StandardSSD_LRS",
         "virtualMachineSize": "Standard_B2ms",
         "adminUsername": "daveyyoung",
