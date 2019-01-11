@@ -4,9 +4,6 @@
     "parameters": {
         "virtualMachineName": {
             "value": "WS06"
-        },
-        "resourceGroup": {
-            "value": "EXCH"
         }
     }
 }

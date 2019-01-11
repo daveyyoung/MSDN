@@ -2,19 +2,17 @@
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "resourceGroup": {
-            "type": "string"
-        },
         "virtualMachineName": {
             "type": "string"
         }
     },
     "variables": {
+        "resourceGroup": "CLIENT",
         "suffix": "[uniqueString(ResourceGroup().id,ResourceGroup().location)]",
         "subscription": "[subscription().id]",
         "networkInterfaceName": "[toLower(concat(parameters('virtualMachineName'),'-nic-', variables('suffix')))]",       
-        "networkSecurityGroupId": "[concat(variables('subscription'),'/resourceGroups/',parameters('resourceGroup'),'-ResourceGroup/providers/Microsoft.Network/networkSecurityGroups/',parameters('resourceGroup'),'-NetworkSecurityGroup')]",
-        "subnetName": "[concat(parameters('resourceGroup'),'-','Subnet')]",     
+        "networkSecurityGroupId": "[concat(variables('subscription'),'/resourceGroups/',variables('resourceGroup'),'-ResourceGroup/providers/Microsoft.Network/networkSecurityGroups/',variables('resourceGroup'),'-NetworkSecurityGroup')]",
+        "subnetName": "[concat(variables('resourceGroup'),'-','Subnet')]",     
         "virtualNetworkId": "[concat(variables('subscription'),'/resourceGroups/NET-ResourceGroup/providers/Microsoft.Network/virtualNetworks/daveyyoung-Network')]",
         "osDiskType": "StandardSSD_LRS",
         "virtualMachineSize": "Standard_B2ms",
