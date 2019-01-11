@@ -4,6 +4,9 @@
     "parameters": {
         "virtualMachineName": {
             "value": "EX03"
+        },
+        "dataDisk": {
+            "value": "Yes"
         }
     }
 }

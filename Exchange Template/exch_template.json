@@ -4,7 +4,13 @@
     "parameters": {
         "virtualMachineName": {
             "type": "string"
-        }
+        },
+        "dataDisk": {
+            "type": "string",
+            "allowedValues": [
+            "Yes",
+            "No"
+            ]}
     },
     "variables": {
         "resourceGroup": "EXCH",
@@ -21,7 +27,17 @@
         "location": "[resourceGroup().location]",
         "nsgId": "[variables('networkSecurityGroupId')]",
         "vnetId": "[variables('virtualNetworkId')]",
-        "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]"
+        "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]",
+        "dataDisks": [{
+            "name": "[concat(parameters('virtualMachineName'),'_data1')]",
+            "caching": "None",
+            "diskSizeGB": "20",
+            "lun": 0,
+            "createOption": "Empty",
+            "managedDisk": {
+                "storageAccountType": "StandardSSD_LRS"
+            }
+        }]
     },
     "resources": [
         {
@@ -65,7 +81,8 @@
                         "createOption": "FromImage",
                         "managedDisk": {
                             "storageAccountType": "[variables('osDiskType')]"
-                        }
+                        },
+                    "dataDisk": "[if(equals(parameters('dataDisk'), 'Yes'), variables('dataDisks'), json('null'))]"
                     },
                     "imageReference": {
                         "publisher": "MicrosoftWindowsServer",
