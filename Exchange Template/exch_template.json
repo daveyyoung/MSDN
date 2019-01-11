@@ -70,8 +70,8 @@
                     "imageReference": {
                         "publisher": "MicrosoftWindowsServer",
                         "offer": "WindowsServer",
-                        "sku": "RS3-Pro",
-                        "version": "2016-Datacenter"
+                        "sku": "2016-Datacenter",
+                        "version": "latest"
                     }
                 },
                 "networkProfile": {
