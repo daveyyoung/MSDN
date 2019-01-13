@@ -81,9 +81,9 @@
                         "createOption": "FromImage",
                         "managedDisk": {
                             "storageAccountType": "[variables('osDiskType')]"
-                        },
-                    "dataDisk": "[if(equals(parameters('dataDisk'), 'Yes'), variables('dataDisks'), json('null'))]"
+                        }
                     },
+                    "dataDisk": "[if(equals(parameters('dataDisk'), 'Yes'), variables('dataDisks'), json('null'))]",
                     "imageReference": {
                         "publisher": "MicrosoftWindowsServer",
                         "offer": "WindowsServer",
